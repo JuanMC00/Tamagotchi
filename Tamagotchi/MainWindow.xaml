@@ -1,0 +1,461 @@
+﻿<Window x:Class="Tamagotchi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tamagotchi"
+        mc:Ignorable="d"
+        Title="Tamagotchi Game" Height="768" Width="1024" MinWidth="800" MinHeight="600" Closed="salir">
+    <Window.Resources>
+        <Storyboard x:Key="animacionComer" AutoReverse="True" RepeatBehavior="3x">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="boca">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="35"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="animacionJugar" AutoReverse="True" RepeatBehavior="2x">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="elipPelota">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="imgPelota">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="elipPelota">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-123">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="imgPelota">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-123">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="animacionMoverPierna" AutoReverse="True" RepeatBehavior="2x">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="piernaizq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-13.89"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="zapatoizq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-18.834"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="cordon1izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-13.49"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="cordon2izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-14.709"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="cordon3izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-0.5"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-15.927"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="piernaizq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-4.137"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="piernaizq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="27.88"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="zapatoizq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-17.236"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="zapatoizq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="27.88"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="cordon1izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-26.562"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="cordon1izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="27.88"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="cordon2izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-21.652"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="cordon2izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="27.88"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="cordon3izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-16.742"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="cordon3izq">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="27.88"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="229*"/>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="419*"/>
+            <ColumnDefinition Width="114*"/>
+            <ColumnDefinition Width="114*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="275*"/>
+            <RowDefinition Height="275*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="imgFondo" Grid.ColumnSpan="5" Margin="0,0,0.333,0.333" Grid.Row="3" Grid.RowSpan="2" MinWidth="8" Source="PaisajeGalactico.jpg" Stretch="UniformToFill"/>
+
+        <Canvas Grid.ColumnSpan="2" Grid.Column="1" Margin="10" Grid.Row="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="500" AllowDrop="True" Drop="colocarColeccionable">
+            <Rectangle x:Name="piernadcha" Fill="#FF165224" HorizontalAlignment="Left" Height="59.667" Stroke="Black" VerticalAlignment="Top" Width="24.705" RadiusY="8.909" RadiusX="8.909" RenderTransformOrigin="0.5,0.5" Canvas.Left="270.025" Canvas.Top="380.313">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse x:Name="cuerpo" Fill="#FF43B05C" HorizontalAlignment="Left" Height="225" Stroke="Black" VerticalAlignment="Top" Width="225" Canvas.Left="130.8" Canvas.Top="184.954"/>
+            <Ellipse x:Name="cabeza" Fill="#FF8BCA1E" HorizontalAlignment="Left" Height="104.654" Stroke="Black" VerticalAlignment="Top" Width="119.7" Canvas.Left="185.608" Canvas.Top="82.8"/>
+            <Ellipse x:Name="ojoIzq" Fill="Black" HorizontalAlignment="Left" Height="16" Stroke="Black" VerticalAlignment="Top" Width="18" Canvas.Left="216.165" Canvas.Top="111.789"/>
+            <Ellipse x:Name="ojoDcho" Fill="Black" HorizontalAlignment="Left" Height="16" Stroke="Black" VerticalAlignment="Top" Width="18" Canvas.Left="256.529" Canvas.Top="111.789"/>
+            <Rectangle x:Name="pectoralIzq" Fill="#FF8BCA1E" Height="35" Canvas.Left="160" RadiusY="17.1" RadiusX="17.1" Stroke="Black" Canvas.Top="230" Width="75"/>
+            <Ellipse x:Name="pezonIzq" Fill="#FF587D16" Height="7.2" Canvas.Left="211" Stroke="Black" Canvas.Top="250" Width="7.6"/>
+            <Rectangle x:Name="pectoralDcho" Fill="#FF8BCA1E" Height="35" Canvas.Left="248.915" RadiusY="17.1" RadiusX="17.1" Stroke="Black" Canvas.Top="230" Width="75" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse x:Name="pezonDcho" Fill="#FF587D16" Height="7.2" Canvas.Left="264.508" Stroke="Black" Canvas.Top="250" Width="7.637" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Path x:Name="boca" Data="M0.57411391,0.5 L0.84712291,0.85816383 C6.4951652,8.0276871 19.065972,13.016405 33.667,13.016405 47.957367,13.016405 60.30299,8.2377148 66.117012,1.3128033 L66.461022,0.88994408 66.48922,1.3753376 C66.496392,1.5604572 66.5,1.7461567 66.5,1.9324055 66.5,13.852365 51.725396,23.515406 33.5,23.515406 15.274603,23.515406 0.50000036,13.852365 0.5,1.9324055 0.50000036,1.559906 0.51442868,1.1896114 0.54293895,0.82174683 z" Fill="#FF165224" Height="24.015" Canvas.Left="211.833" Stretch="Fill" Stroke="Black" Canvas.Top="148.106" Width="67"/>
+            <Path x:Name="bocaTriste" Data="M0.57411391,0.5 L0.84712291,0.85816383 C6.4951652,8.0276871 19.065972,13.016405 33.667,13.016405 47.957367,13.016405 60.30299,8.2377148 66.117012,1.3128033 L66.461022,0.88994408 66.48922,1.3753376 C66.496392,1.5604572 66.5,1.7461567 66.5,1.9324055 66.5,13.852365 51.725396,23.515406 33.5,23.515406 15.274603,23.515406 0.50000036,13.852365 0.5,1.9324055 0.50000036,1.559906 0.51442868,1.1896114 0.54293895,0.82174683 z" Fill="#FF165224" Height="24.015" Canvas.Left="211.833" Stretch="Fill" Stroke="Black" Canvas.Top="148.106" Width="67" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="179.847"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Rectangle x:Name="brazoizq" Fill="#FF165224" Height="104" Canvas.Left="124.388" Stroke="Black" Canvas.Top="136.263" Width="14.667" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="147.318"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="dedo1izq" Fill="#FF8BCA1E" Height="9.78" Canvas.Left="61" Stroke="Black" Canvas.Top="140.955" Width="29.333" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-12.145"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="dedo2izq" Fill="#FF8BCA1E" Height="9.78" Canvas.Left="68.5" Stroke="Black" Canvas.Top="112.675" Width="29.333" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="48.941"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="dedo3izq" Fill="#FF8BCA1E" Height="9.78" Canvas.Left="96.5" Stroke="Black" Canvas.Top="109.562" Width="29.333" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="111.317"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse x:Name="manoizq" Fill="#FF43B05C" Height="37.833" Canvas.Left="83.666" Stroke="Black" Canvas.Top="118.569" Width="33.5"/>
+            <Rectangle x:Name="brazodcho" Fill="#FF165224" Height="104" Canvas.Left="348.386" Stroke="Black" Canvas.Top="135.483" Width="14.665" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform AngleX="0.006"/>
+                        <RotateTransform Angle="-147.315"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="dedo1dcho" Fill="#FF8BCA1E" Height="9.78" Canvas.Left="397.102" Stroke="Black" Canvas.Top="140.175" Width="29.329" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform AngleY="0.003"/>
+                        <RotateTransform Angle="12.144"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="dedo2dcho" Fill="#FF8BCA1E" Height="9.78" Canvas.Left="389.603" Stroke="Black" Canvas.Top="111.895" Width="29.329" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform AngleY="-0.007"/>
+                        <RotateTransform Angle="-48.937"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="dedo3dcho" Fill="#FF8BCA1E" Height="9.78" Canvas.Left="361.606" Stroke="Black" Canvas.Top="108.782" Width="29.33" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform AngleX="0.005"/>
+                        <RotateTransform Angle="-111.315"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse x:Name="manodcha" Fill="#FF43B05C" Height="37.833" Canvas.Left="370.272" Stroke="Black" Canvas.Top="117.789" Width="33.496" RenderTransformOrigin="0.5,0.5">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Rectangle x:Name="antena1izq" Fill="#FF165224" HorizontalAlignment="Left" Height="49.386" Stroke="Black" VerticalAlignment="Top" Width="8.944" RenderTransformOrigin="0.5,0.5" Canvas.Left="208.961" Canvas.Top="47.044">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-26.362"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse x:Name="antena2izq" Fill="#FF43B05C" HorizontalAlignment="Left" Height="22.778" Stroke="Black" VerticalAlignment="Top" Width="23.222" Canvas.Left="190.612" Canvas.Top="36.334"/>
+            <Rectangle x:Name="antena1dcha" Fill="#FF165224" HorizontalAlignment="Left" Height="49.386" Stroke="Black" VerticalAlignment="Top" Width="8.806" RenderTransformOrigin="0.5,0.5" Canvas.Left="272.221" Canvas.Top="47.044">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="0.997" ScaleX="-1.003"/>
+                        <SkewTransform AngleY="0.711"/>
+                        <RotateTransform Angle="26.008"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Ellipse x:Name="antena2dcha" Fill="#FF43B05C" HorizontalAlignment="Left" Height="22.778" Stroke="Black" VerticalAlignment="Top" Width="22.862" RenderTransformOrigin="0.5,0.5" Canvas.Left="276.23" Canvas.Top="36.334">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Rectangle x:Name="piernaizq" Fill="#FF165224" HorizontalAlignment="Left" Height="59.667" Stroke="Black" VerticalAlignment="Top" Width="24.667" RadiusY="8.909" RadiusX="8.909" Canvas.Left="190.11" Canvas.Top="380.313" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="zapatoizq" Fill="#FF811919" HorizontalAlignment="Left" Height="27.093" Stroke="Black" VerticalAlignment="Top" Width="72.5" RadiusY="9.278" RadiusX="9.278" Canvas.Left="142.279" Canvas.Top="413.108" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="cordon1izq" Fill="White" HorizontalAlignment="Left" Height="14.89" Stroke="Black" VerticalAlignment="Top" Width="5.5" Canvas.Left="154.321" Canvas.Top="413.108" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="cordon2izq" Fill="White" HorizontalAlignment="Left" Height="14.89" Stroke="Black" VerticalAlignment="Top" Width="5.5" Canvas.Left="164.821" Canvas.Top="413.108" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="cordon3izq" Fill="White" HorizontalAlignment="Left" Height="14.89" Stroke="Black" VerticalAlignment="Top" Width="5.5" Canvas.Left="175.321" Canvas.Top="413.108" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="zapatodcha" Fill="#FF811919" HorizontalAlignment="Left" Height="27.093" Stroke="Black" VerticalAlignment="Top" Width="72.5" RadiusY="9.278" RadiusX="9.278" RenderTransformOrigin="0.5,0.5" Canvas.Left="270.027" Canvas.Top="413.108">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="cordon1dcha" Fill="White" HorizontalAlignment="Left" Height="14.89" Stroke="Black" VerticalAlignment="Top" Width="5.509" RenderTransformOrigin="0.5,0.5" Canvas.Left="325.069" Canvas.Top="413.108">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="cordon2dcha" Fill="White" HorizontalAlignment="Left" Height="14.89" Stroke="Black" VerticalAlignment="Top" Width="5.507" RenderTransformOrigin="0.5,0.5" Canvas.Left="314.554" Canvas.Top="413.108">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="cordon3dcha" Fill="White" HorizontalAlignment="Left" Height="14.89" Stroke="Black" VerticalAlignment="Top" Width="5.509" RenderTransformOrigin="0.5,0.5" Canvas.Left="304.037" Canvas.Top="413.108">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Path x:Name="pantalones" Data="M0.5,0.5 L217.15539,0.5 216.5789,2.6303711 C203.24469,49.580612 160.0521,83.968994 108.82769,83.968994 57.603283,83.968994 14.410709,49.580612 1.0764832,2.6303711 z" Fill="#FF001CA0" HorizontalAlignment="Left" Height="84.469" Canvas.Left="134.472" Stretch="Fill" Stroke="Black" Canvas.Top="325.485" VerticalAlignment="Top" Width="217.656"/>
+            <Image x:Name="imgSombrero" HorizontalAlignment="Left" Height="107" VerticalAlignment="Top" Width="135" Canvas.Left="175" Source="Sombrero.png" Canvas.Top="5" Visibility="Hidden" MouseLeftButtonUp="ocultarSombrero"/>
+            <Image x:Name="imgPizzaPlanet" Height="73" Canvas.Left="200" Canvas.Top="327" Width="87" Source="PizzaPlanet.png" Visibility="Hidden" MouseLeftButtonUp="ocultarLogo"/>
+            <Ellipse x:Name="elippequeña" Fill="White" Height="16.352" Canvas.Left="305.308" Stroke="Black" Canvas.Top="91.467" Width="23.834" Visibility="Hidden"/>
+            <Ellipse x:Name="elipmediana" Fill="White" Height="30.667" Canvas.Left="320.475" Stroke="Black" Canvas.Top="64.819" Width="44.667" Visibility="Hidden"/>
+            <Ellipse x:Name="elipgrande" Height="64.819" Canvas.Left="345.833" Stroke="Black" Width="91.667" Canvas.Top="10" Fill="White" Visibility="Hidden"/>
+            <Image x:Name="imgPizza" Height="50" Canvas.Left="366.809" Canvas.Top="16.93" Width="50" Source="Pizza.png" Visibility="Hidden"/>
+        </Canvas>
+        <Label x:Name="lblLogros" Content="Logros" Height="35" Margin="5,5,0,0" Grid.Row="3" VerticalAlignment="Top" Width="214" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Foreground="White"/>
+        <Label x:Name="lblHabilidades" Content="Habilidades" Height="35" Margin="5,5.333,0,0" Grid.Row="4" VerticalAlignment="Top" Width="214" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Foreground="White"/>
+        <Label x:Name="lblColeccionables" Content="Coleccionables" Height="35" Margin="4.667,5,0,0" Grid.Row="3" VerticalAlignment="Top" Width="210" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="3" Foreground="White" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblRanking" Content="Ranking" Height="35" Margin="9.667,5.333,0,0" Grid.Row="4" VerticalAlignment="Top" Width="210" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="3" Foreground="White" Grid.ColumnSpan="2"/>
+        <StackPanel x:Name="spnLogros" Margin="10,40,9.667,9.667" Grid.Row="3" Background="#FFA20F0F"/>
+        <WrapPanel x:Name="wpnPremios" Margin="10,40.333,9.667,10.333" Grid.Row="4" Background="#FF7E18CD">
+            <Image x:Name="imgFull" Height="90" Width="100" Source="Rayo.png" MouseUp="usarHabilidad" Visibility="Hidden"/>
+            <Image x:Name="imgFreeze" Height="90" Width="100" Source="Reloj.png" MouseUp="usarHabilidad" Visibility="Hidden"/>
+            <Image x:Name="imgx2" Height="90" Width="100" Source="x2.png" MouseUp="usarHabilidad" Visibility="Hidden"/>
+            <Image x:Name="imgRandom" Height="90" Width="100" Source="Random.png" MouseUp="usarHabilidad" Visibility="Hidden"/>
+        </WrapPanel>
+        <WrapPanel x:Name="wpnColeccionables" Margin="9.667,40,10.333,9.667" Grid.Row="3" Grid.Column="3" Background="Black" OpacityMask="Black" Opacity="0.75" Grid.ColumnSpan="2">
+            <Image x:Name="imgFondo2" Height="89" Width="96" Source="StarWars.jpg" MouseUp="cambiarFondo" ToolTip="Pinche para cambiar el fondo"/>
+            <Image x:Name="imgFondo3" Height="77.334" Width="100" Source="ET.jpg" MouseUp="cambiarFondo" ToolTip="Pinche para cambiar el fondo"/>
+            <Image x:Name="imgFondo4" Height="66.556" Width="101.333" Source="Interestelar.jpg" MouseUp="cambiarFondo" ToolTip="Pinche para cambiar el fondo"/>
+            <Image x:Name="imgFondo5" Height="51.668" Width="100.222" Source="PaisajeGalactico.jpg" MouseUp="cambiarFondo" ToolTip="Pinche para cambiar el fondo">
+                <Image.OpacityMask>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Image.OpacityMask>
+            </Image>
+            <Image x:Name="imgSombreroMini" Height="48" Width="103" Source="Sombrero.png" MouseLeftButtonDown="inicioArrastrarSombrero"/>
+            <Image x:Name="imgPizzaPlanetMini" Height="49" Width="85" Source="PizzaPlanet.png" MouseLeftButtonDown="inicioArrastrarLogo"/>
+        </WrapPanel>
+        <Button x:Name="btnComer" Content="Comer" Grid.Column="3" Margin="9.667,10,0,0" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" Click="btnComer_Click" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25"/>
+        <Button x:Name="btnDormir" Content="Dormir" Grid.Column="3" Margin="9.667,10.333,0,0" VerticalAlignment="Top" Grid.Row="1" FontSize="15" FontFamily="Kristen ITC" FontWeight="Bold" Click="btnDormir_Click" Width="100" HorizontalAlignment="Left" Height="25"/>
+        <Button x:Name="btnJugar" Content="Jugar" Grid.Column="3" Margin="9.667,9.667,0,0" VerticalAlignment="Top" Grid.Row="2" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" Click="btnJugar_Click" Width="100" HorizontalAlignment="Left" Height="25"/>
+        <ProgressBar x:Name="pbEnergia" Grid.Column="2" Margin="10.333,10,10.333,9.667" Value="90" ValueChanged="pbEnergia_ValueChanged"/>
+        <ProgressBar x:Name="pbDiversion" Grid.Column="2" Margin="10.333,9.667,10.333,10" Grid.Row="2" Value="90" ValueChanged="pbDiversion_ValueChanged"/>
+        <ProgressBar x:Name="pbCansancio" Grid.Column="2" Margin="10.333" Grid.Row="1" Value="90" ValueChanged="pbCansancio_ValueChanged"/>
+        <Label x:Name="lblGameOver" Content="GAMER OVER" HorizontalAlignment="Left" Height="89" Margin="35.333,262.333,0,-19.333" VerticalAlignment="Top" Width="326" FontSize="50" FontFamily="Showcard Gothic" Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" Visibility="Hidden">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FFB919CE" Offset="0.702"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <Label x:Name="lblPuntuacionTitulo" Content="Tu puntuación es:" HorizontalAlignment="Left" Height="30" Margin="73,20.667,0,0" VerticalAlignment="Top" Width="146" FontFamily="Kristen ITC" FontWeight="Bold" FontSize="15" Grid.Row="5" Foreground="White"/>
+        <Label x:Name="lblPuntuacion" Content="Label" HorizontalAlignment="Left" Height="30" Margin="10.333,19.667,0,0" VerticalAlignment="Top" Width="70" FontSize="15" FontFamily="Kristen ITC" FontWeight="Bold" Grid.Column="1" Grid.Row="5" Visibility="Hidden" Foreground="White"/>
+        <Label x:Name="lblCansancio" Content="Cansancio&#xA;" HorizontalAlignment="Right" Margin="0,7.333,8.667,0" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" RenderTransformOrigin="0.836,0.493" Grid.Row="1" Grid.Column="1" Background="Black" Foreground="White" Height="35" Width="89"/>
+        <Label x:Name="lblDiversion" Content="Diversión&#xA;" HorizontalAlignment="Right" Margin="0,6.667,8.667,0" VerticalAlignment="Top" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Background="Black" Foreground="White" Height="35" Width="83"/>
+        <Image x:Name="imgLogo" Margin="10,10,9.667,0.333" Grid.RowSpan="2" Source="Logo.gif" MouseLeftButtonUp="acercaDe"/>
+        <Ellipse x:Name="elipPelota" Grid.ColumnSpan="2" Grid.Column="1" Fill="White" HorizontalAlignment="Left" Margin="75.333,135.333,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="80" Width="80" Visibility="Hidden">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Image x:Name="imgPelota" Grid.Column="1" HorizontalAlignment="Left" Margin="75.333,135.333,0,0" Grid.Row="4" VerticalAlignment="Top" Source="Pelota.png" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Height="80" Width="80" Visibility="Hidden">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Label x:Name="lblNombre" Content="Bienvenido," HorizontalAlignment="Left" Height="25" Margin="10" Grid.Row="2" VerticalAlignment="Top" Width="209" Foreground="White" FontFamily="Kristen ITC"/>
+        <TextBlock x:Name="txtEnergia" Grid.Column="1" HorizontalAlignment="Right" Margin="0,10,9.667,0" TextWrapping="Wrap" Text="Energía" VerticalAlignment="Top" Foreground="White" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" TextAlignment="Right" Height="20" Width="71"/>
+        <Button x:Name="btnStop" Content="Parar" Grid.Column="3" HorizontalAlignment="Left" Height="41" Margin="9.667,9.667,0,0" Grid.Row="5" VerticalAlignment="Top" Width="94" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" Click="btnStop_Click"/>
+        <Button x:Name="btnRestart" Content="Reiniciar" Grid.Column="4" HorizontalAlignment="Left" Height="41" Margin="9.667,9.667,0,0" Grid.Row="5" VerticalAlignment="Top" Width="94" FontFamily="Kristen ITC" FontSize="15" FontWeight="Bold" Click="btnRestart_Click"/>
+        <StackPanel x:Name="spnRanking" Margin="9.667,40.333,8.333,10.333" Grid.Row="4" Background="#FFC4AF31" Grid.ColumnSpan="2" Grid.Column="3"/>
+
+    </Grid>
+</Window>
