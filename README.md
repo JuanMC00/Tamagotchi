@@ -17,7 +17,7 @@ Por último, el tamagotchi realiza una serie de habilidades cuando se pulsa algu
 ![Interfaz](https://user-images.githubusercontent.com/72213915/139277118-3fefa345-1543-459a-9e75-8213f80f707e.jpg)
 
 ## Tecnologías:
-Lenguajes: ![Python](https://img.shields.io/static/v1?style=for-the-badge&message=Python&color=3776AB&logo=Python&logoColor=FFFFFF&label=)
+Lenguajes: ![C Sharp](https://img.shields.io/static/v1?style=for-the-badge&message=C+Sharp&color=239120&logo=C+Sharp&logoColor=FFFFFF&label=)
 ![XAML](https://img.shields.io/static/v1?style=for-the-badge&message=XAML&color=0C54C2&logo=XAML&logoColor=FFFFFF&label=) </br>
 IDE: ![Visual Studio](https://img.shields.io/static/v1?style=for-the-badge&message=Visual+Studio&color=5C2D91&logo=Visual+Studio&logoColor=FFFFFF&label=) </br>
 Framework: ![.NET](https://img.shields.io/static/v1?style=for-the-badge&message=.NET&color=512BD4&logo=.NET&logoColor=FFFFFF&label=) </br>
